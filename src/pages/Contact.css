@@ -77,6 +77,59 @@
   .contact-socials { grid-template-columns: 1fr; }
   .contact-form-card .card-body { padding: 24px 18px; }
 }
-@media (max-width: 400px) {
-  .contact-info-card { flex-direction: column; gap: 10px; }
+/* ── Form Validation States ─────────────────── */
+.input-field.error {
+  border-color: var(--color-danger) !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
 }
+.input-field.success {
+  border-color: var(--color-success) !important;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+}
+.select-field { cursor: pointer; appearance: none; }
+[data-theme="dark"] .select-field option { background: #13141d; color: #f1f5f9; }
+[data-theme="light"] .select-field option { background: #fff; color: #0f1529; }
+
+.field-error {
+  display: flex; align-items: center; gap: 5px;
+  color: var(--color-danger); font-size: 0.78rem; font-weight: 500;
+  margin-top: 6px;
+}
+.field-success {
+  display: flex; align-items: center; gap: 5px;
+  color: var(--color-success); font-size: 0.78rem; font-weight: 500;
+  margin-top: 6px;
+}
+.field-meta {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; min-height: 24px;
+}
+.char-count {
+  font-size: 0.75rem; color: var(--text-muted);
+  margin-top: 6px; flex-shrink: 0; margin-left: 8px;
+}
+
+/* Required star & optional tag */
+.required-star { color: var(--color-danger); margin-left: 2px; }
+.optional-tag  { color: var(--text-muted); font-size: 0.72rem; font-weight: 400; margin-left: 4px; }
+
+/* Input label with icon */
+.input-label {
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* Error banner */
+.form-error-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; border-radius: var(--radius-md);
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: var(--color-danger); font-size: 0.875rem; font-weight: 500;
+  margin-bottom: 20px; line-height: 1.5;
+}
+
+/* Form footer note */
+.form-note {
+  text-align: center; font-size: 0.78rem;
+  color: var(--text-muted); margin-top: 16px; line-height: 1.5;
+}
+.form-note strong { color: var(--color-primary); }

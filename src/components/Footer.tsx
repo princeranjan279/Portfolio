@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Link } from 'react-router-dom';
 import {
   Code2, Mail, Phone, MapPin,
   ArrowRight, Heart, ExternalLink,
-  ChevronRight, Sparkles
+  ChevronRight, Sparkles, AlertCircle, CheckCircle2
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon, InstagramIcon, FacebookIcon } from './SocialIcons';
+import { EMAILJS_CONFIG, EMAILJS_NEWSLETTER_TEMPLATE } from '../config/emailjs';
 import './Footer.css';
+
 
 const socials = [
   { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/prince-ranjan-5ba3a0172/', label: 'LinkedIn', color: '#0a66c2' },
@@ -36,11 +39,30 @@ const services = [
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [nlStatus, setNlStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [nlError, setNlError] = useState('');
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const isValidEmail = (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
+
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) { setSubscribed(true); setEmail(''); }
+    if (!email.trim()) { setNlError('Please enter your email.'); return; }
+    if (!isValidEmail(email)) { setNlError('Please enter a valid email address.'); return; }
+    setNlError('');
+    setNlStatus('sending');
+    try {
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_NEWSLETTER_TEMPLATE,
+        { subscriber_email: email.trim(), to_email: EMAILJS_CONFIG.TO_EMAIL },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+      setNlStatus('sent');
+      setEmail('');
+    } catch (_err) {
+      setNlStatus('error');
+      setNlError('Could not subscribe. Please try again later.');
+    }
   };
 
   return (
@@ -135,23 +157,29 @@ const Footer: React.FC = () => {
             <p className="footer-newsletter-desc">
               Get tips on web development, digital marketing & career growth — straight to your inbox.
             </p>
-            {subscribed ? (
+            {nlStatus === 'sent' ? (
               <div className="footer-subscribed">
-                <Heart size={16} /> Thanks! You're in 🎉
+                <CheckCircle2 size={16} /> You're subscribed! Thanks 🎉
               </div>
             ) : (
-              <form className="footer-newsletter-form" onSubmit={handleSubscribe}>
+              <form className="footer-newsletter-form" onSubmit={handleSubscribe} noValidate>
                 <input
-                  type="email" required placeholder="your@email.com"
-                  className="footer-newsletter-input"
-                  value={email} onChange={e => setEmail(e.target.value)}
+                  type="email" placeholder="your@email.com"
+                  className={`footer-newsletter-input ${nlError ? 'nl-error' : ''}`}
+                  value={email}
+                  onChange={e => { setEmail(e.target.value); if (nlError) setNlError(''); setNlStatus('idle'); }}
                   aria-label="Email for newsletter"
+                  disabled={nlStatus === 'sending'}
                 />
-                <button type="submit" className="footer-newsletter-btn" aria-label="Subscribe">
-                  <ArrowRight size={16} />
+                <button type="submit" className="footer-newsletter-btn" aria-label="Subscribe" disabled={nlStatus === 'sending'}>
+                  {nlStatus === 'sending' ? <span className="nl-spinner" /> : <ArrowRight size={16} />}
                 </button>
               </form>
             )}
+            {nlError && (
+              <p className="nl-error-msg"><AlertCircle size={12} /> {nlError}</p>
+            )}
+
             <div className="footer-badges">
               <span className="footer-badge">⚡ Available for Work</span>
               <span className="footer-badge">🌍 Remote Friendly</span>
