@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import {
   Mail, Phone, MapPin, Send,
   Clock, MessageSquare, CheckCircle2, Loader2,
-  AlertCircle, User, AtSign, PhoneCall, Briefcase
+  AlertCircle, User, AtSign, PhoneCall, Briefcase, ChevronDown
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon, InstagramIcon, FacebookIcon } from '../components/SocialIcons';
 import { EMAILJS_CONFIG } from '../config/emailjs';
@@ -33,9 +33,36 @@ const socials = [
 ];
 
 const faqs = [
-  { q: 'What is your typical project timeline?', a: 'Most websites take 7-21 days depending on complexity. I always provide a detailed timeline upfront.' },
-  { q: 'Do you offer post-launch support?',       a: 'Yes! I offer 30 days of free support after delivery and ongoing maintenance packages.' },
-  { q: 'How do I get started?',                   a: "Simply send me an email or fill the contact form. We'll schedule a free 30-minute discovery call." },
+  {
+    q: 'What is your typical project timeline?',
+    a: 'Most websites take 7–21 days depending on complexity. Simple landing pages can be done in 3–5 days, while full multi-page projects with custom features may take up to 4 weeks. I always provide a clear timeline and milestone plan upfront before starting.',
+    tag: 'Timeline'
+  },
+  {
+    q: 'How much do your services cost?',
+    a: 'Pricing depends on project scope and requirements. A basic website starts from ₹5,000–₹15,000, while full business websites or e-commerce stores range from ₹20,000–₹80,000+. Digital marketing packages are available from ₹3,000/month. Contact me for a free custom quote.',
+    tag: 'Pricing'
+  },
+  {
+    q: 'Can you redesign my existing website?',
+    a: 'Absolutely. Website redesigns are one of my specialties. I analyze your current site, identify UX issues, and rebuild it with a modern, fast, responsive design while preserving your existing content and SEO rankings wherever possible.',
+    tag: 'Redesign'
+  },
+  {
+    q: 'What platforms and technologies do you work with?',
+    a: 'I work with React, TypeScript, HTML/CSS/JavaScript for custom development, and WordPress for CMS-based sites. For marketing, I run campaigns on Meta Ads (Facebook & Instagram), Google Ads, and manage social platforms including LinkedIn and Instagram.',
+    tag: 'Tech'
+  },
+  {
+    q: 'How do I get started with you?',
+    a: "Simply fill the contact form on this page or email me at princeranjan270@gmail.com. I'll get back within 24 hours to schedule a free 30-minute discovery call where we discuss your goals, requirements, and budget — no strings attached.",
+    tag: 'Process'
+  },
+  {
+    q: 'Do you work with international clients?',
+    a: 'Yes! I work with clients across India, the US, UK, UAE, and other countries. All communication happens via email, WhatsApp, Zoom, or Google Meet. Payments are accepted via bank transfer, PayPal, Razorpay, or UPI.',
+    tag: 'Global'
+  },
 ];
 
 /* ── Validation ─────────────────────────────── */
@@ -84,6 +111,7 @@ const Contact: React.FC = () => {
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   /* Validate a single field on blur */
   const handleBlur = (field: keyof FormFields) => {
@@ -218,15 +246,6 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="contact-faq">
-              <h3 className="heading-2" style={{ marginBottom: 20 }}>Quick FAQs</h3>
-              {faqs.map(({ q, a }) => (
-                <div key={q} className="faq-item">
-                  <p className="faq-q">{q}</p>
-                  <p className="faq-a">{a}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: Form */}
@@ -388,6 +407,62 @@ const Contact: React.FC = () => {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Full Width FAQ Section ─────────────────────────── */}
+      <section className="section faq-section">
+        <div className="faq-section-bg" />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="section-header">
+            <div className="section-label">FAQ</div>
+            <h2 className="display-2 section-title">
+              Frequently Asked <span className="text-gradient">Questions</span>
+            </h2>
+            <p className="section-desc">
+              Everything you need to know before we work together. Can't find your answer?
+              {' '}<a href="mailto:princeranjan270@gmail.com" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Drop me an email</a>.
+            </p>
+          </div>
+
+          <div className="faq-grid">
+            {faqs.map(({ q, a, tag }, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div
+                  key={i}
+                  className={`faq-accordion ${isOpen ? 'faq-open' : ''}`}
+                  onClick={() => setOpenFaq(isOpen ? null : i)}
+                  role="button"
+                  aria-expanded={isOpen}
+                  tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setOpenFaq(isOpen ? null : i)}
+                >
+                  <div className="faq-accordion-header">
+                    <div className="faq-number-badge">{String(i + 1).padStart(2, '0')}</div>
+                    <div className="faq-accordion-question">
+                      <p className="faq-q-text">{q}</p>
+                      <span className="faq-tag">{tag}</span>
+                    </div>
+                    <div className={`faq-chevron ${isOpen ? 'faq-chevron-open' : ''}`}>
+                      <ChevronDown size={18} />
+                    </div>
+                  </div>
+                  <div className={`faq-accordion-body ${isOpen ? 'faq-body-open' : ''}`}>
+                    <p className="faq-a-text">{a}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="faq-cta">
+            <p className="faq-cta-text">Still have questions?</p>
+            <a href="mailto:princeranjan270@gmail.com" className="btn btn-primary">
+              <Mail size={16} /> Email Me Directly
+            </a>
           </div>
         </div>
       </section>
