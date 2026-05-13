@@ -47,7 +47,7 @@ A premium, fully responsive personal portfolio website built with **React + Type
 
 ```bash
 # Clone the repository
-git clone https://github.com/princeranjan279/prince-portfolio.git
+git clone https://github.com/princeranjan279/Portfolio.git
 
 # Navigate into directory
 cd prince-portfolio
