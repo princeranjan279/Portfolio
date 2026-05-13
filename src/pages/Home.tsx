@@ -267,7 +267,7 @@ const Home: React.FC = () => {
           <div className="hero-right animate-fadeInUp delay-3">
             <div className="hero-avatar-wrapper animate-float">
               <div className="hero-avatar">
-                <div className="avatar-initials">PR</div>
+                <img src="/profile.jpg" alt="Prince Ranjan" className="avatar-img" />
                 <div className="avatar-ring" />
                 <div className="avatar-ring ring-2" />
               </div>

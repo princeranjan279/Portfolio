@@ -197,7 +197,7 @@ const About: React.FC = () => (
           <div className="about-avatar-card">
             <div className="about-avatar-wrap">
               <div className="about-avatar">
-                <div className="avatar-initials" style={{ fontSize: '3.5rem' }}>PR</div>
+                <img src="/profile.jpg" alt="Prince Ranjan" className="avatar-img" />
               </div>
               <div className="about-avail-dot" title="Available for work" />
             </div>

@@ -1,20 +1,20 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { ExternalLink, Globe, FolderOpen, Filter } from "lucide-react";
 import { GithubIcon } from "../components/SocialIcons";
 import "./Projects.css";
 
 const projects = [
-  { id: 1, title: "E-Commerce Fashion Store", category: "WordPress", tags: ["WordPress", "WooCommerce", "SEO"], desc: "A full-featured fashion e-commerce store with custom WooCommerce setup, product filters, wishlist, and payment gateway integration.", color: "#5e72e4", emoji: "🛍️", live: "https://example.com", github: "" },
-  { id: 2, title: "Digital Marketing Agency", category: "React", tags: ["React", "TypeScript", "GSAP"], desc: "Premium agency landing page with smooth scroll animations, service showcases, and lead capture forms.", color: "#11cdef", emoji: "🚀", live: "https://example.com", github: "https://github.com/princeranjan" },
-  { id: 3, title: "Restaurant Booking System", category: "WordPress", tags: ["WordPress", "PHP", "MySQL"], desc: "Custom WordPress site with online table reservation, menu showcase, and admin dashboard for booking management.", color: "#fb6340", emoji: "🍽️", live: "https://example.com", github: "" },
+  { id: 1, title: "Prishal Technolabs Website", category: "React", tags: ["React", "TypeScript", "Tailwind"], desc: "Complete corporate website and digital presence for Prishal Technolabs. Built with modern React architecture for extreme performance and SEO.", color: "#5e72e4", emoji: "🏢", live: "https://example.com", github: "" },
+  { id: 2, title: "E-Commerce Fashion Store", category: "WordPress", tags: ["WordPress", "WooCommerce", "SEO"], desc: "A full-featured fashion e-commerce store with custom WooCommerce setup, product filters, wishlist, and payment gateway integration.", color: "#11cdef", emoji: "🛍️", live: "https://example.com", github: "" },
+  { id: 3, title: "B2B Marketing Campaigns", category: "Marketing", tags: ["Meta Ads", "Google Ads", "Lead Gen"], desc: "High-ROI digital marketing campaigns resulting in 300% lead increase and lower customer acquisition costs.", color: "#fb6340", emoji: "🚀", live: "https://example.com", github: "" },
   { id: 4, title: "Real Estate Listing Portal", category: "React", tags: ["React", "Leaflet", "API"], desc: "Property listing app with map integration, advanced search filters, virtual tours, and agent profiles.", color: "#2dce89", emoji: "🏠", live: "https://example.com", github: "https://github.com/princeranjan" },
   { id: 5, title: "EdTech Course Platform", category: "WordPress", tags: ["WordPress", "LearnDash", "LMS"], desc: "Complete Learning Management System with course builder, quizzes, progress tracking, and certificate generation.", color: "#f7c948", emoji: "📚", live: "https://example.com", github: "" },
   { id: 6, title: "Social Media Dashboard", category: "React", tags: ["React", "Chart.js", "API"], desc: "Analytics dashboard for social media managers with real-time metrics, post scheduling, and performance reports.", color: "#e1306c", emoji: "📊", live: "https://example.com", github: "https://github.com/princeranjan" },
   { id: 7, title: "Fitness & Wellness App", category: "React", tags: ["React", "CSS Animations", "Firebase"], desc: "Modern fitness platform with workout plans, nutrition tracker, progress charts, and coach booking.", color: "#5e72e4", emoji: "💪", live: "https://example.com", github: "https://github.com/princeranjan" },
-  { id: 8, title: "Corporate Portfolio Website", category: "WordPress", tags: ["WordPress", "Elementor", "SEO"], desc: "Professional B2B website with service pages, case studies, team profiles, and contact forms.", color: "#11cdef", emoji: "🏢", live: "https://example.com", github: "" },
+  { id: 8, title: "Local SEO Dominance", category: "Marketing", tags: ["SEO", "GMB", "Content"], desc: "Comprehensive local SEO strategy that ranked a client #1 for competitive keywords in their region.", color: "#11cdef", emoji: "🔍", live: "https://example.com", github: "" },
 ];
 
-const categories = ["All", "WordPress", "React"];
+const categories = ["All", "React", "WordPress", "Marketing"];
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState("All");
