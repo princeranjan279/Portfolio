@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import WhatsAppWidget from './components/WhatsAppWidget';
+import AIAgentWidget from './components/AIAgentWidget';
 import './index.css';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -59,6 +61,8 @@ const App: React.FC = () => (
         </Routes>
       </Suspense>
       <Footer />
+      <WhatsAppWidget />
+      <AIAgentWidget />
     </BrowserRouter>
   </ThemeProvider>
 );

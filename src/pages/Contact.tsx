@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import {
   Mail, Phone, MapPin, Send,
@@ -112,6 +113,30 @@ const Contact: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const location = useLocation();
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  /* AI Agent Redirect Handling */
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get('query');
+    if (query) {
+      setForm(prev => ({ 
+        ...prev, 
+        message: `Hi Prince,\n\nI am reaching out regarding: "${query}"\n\nI would like to discuss this further.` 
+      }));
+      // Scroll to form and focus name
+      setTimeout(() => {
+        if (formRef.current) {
+          const y = formRef.current.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          if (nameInputRef.current) {
+            nameInputRef.current.focus();
+          }
+        }
+      }, 500);
+    }
+  }, [location.search]);
 
   /* Validate a single field on blur */
   const handleBlur = (field: keyof FormFields) => {
@@ -289,6 +314,7 @@ const Contact: React.FC = () => {
                             <User size={13} /> Full Name <span className="required-star">*</span>
                           </label>
                           <input id="name" name="name" type="text"
+                            ref={nameInputRef}
                             className={`input-field ${fieldState('name')}`}
                             placeholder="e.g. Rakesh Kumar"
                             value={form.name}
