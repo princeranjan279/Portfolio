@@ -11,6 +11,7 @@ import { LinkedinIcon, GithubIcon, InstagramIcon, FacebookIcon } from '../compon
 import HomeGame from './HomeGame';
 import SkillLightbox from '../components/SkillLightbox';
 import { skillGroups, skillsById, type Skill } from '../data/skills';
+import { allProjects } from '../data/projects';
 import './Home.css';
 
 /* ── Data ──────────────────────────────────── */
@@ -61,11 +62,11 @@ const services = [
     badge: '',
   },
   {
-    icon: Cpu,
-    color: '#8b5cf6',
-    title: 'Website Management & AI Tools',
-    desc: 'Ongoing website optimization, performance audits, security updates, and AI-powered digital workflows for businesses.',
-    badge: '',
+    icon: BarChart2,
+    color: '#f59e0b',
+    title: 'Trading & Market Analysis',
+    desc: 'Data-driven analysis of the Indian stock market, focusing on equity trading, intraday strategies, technical analysis, and IPO evaluation.',
+    badge: 'Markets',
   },
   {
     icon: GraduationCap,
@@ -111,34 +112,12 @@ const process = [
   { step: '04', icon: Zap,           title: 'Launch & Support',     desc: '30 days of free post-launch support, bug fixes, and performance monitoring included.',  color: '#f59e0b' },
 ];
 
-const projects = [
-  {
-    title: 'Prishal Technolabs Website',
-    desc:  'Official website for an AI & software company — built with React, SEO-optimized, and GEO-ready for AI search engines.',
-    tags:  ['React.js', 'SEO', 'GEO', 'AI'],
-    color: '#6366f1', emoji: '🏢',
-    link:  'https://prishal.ai',
-  },
-  {
-    title: 'E-Commerce WordPress Store',
-    desc:  'Full WooCommerce store with custom Elementor design, Meta Pixel integration, and Meta Ads retargeting funnel.',
-    tags:  ['WordPress', 'WooCommerce', 'Meta Ads'],
-    color: '#06b6d4', emoji: '🛒',
-    link:  '/projects',
-  },
-  {
-    title: 'Digital Marketing Campaigns',
-    desc:  'Ran 10+ high-ROAS Meta Ads campaigns for SMBs across India — grew combined revenue by 3x in 6 months.',
-    tags:  ['Meta Ads', 'Google Ads', 'Analytics'],
-    color: '#10b981', emoji: '📈',
-    link:  '/projects',
-  },
-];
+const featuredProjects = allProjects.filter(p => p.isFeatured).slice(0, 3);
 
 const counters = [
   { end: 50, suffix: '+', label: 'Projects Delivered', icon: Briefcase,  color: '#6366f1' },
   { end: 30, suffix: '+', label: 'Happy Clients',      icon: Users,      color: '#06b6d4' },
-  { end: 3,  suffix: '+', label: 'Years Experience',   icon: Clock,      color: '#10b981' },
+  { end: 2,  suffix: '+', label: 'Years Experience',   icon: Clock,      color: '#10b981' },
   { end: 100,suffix: '%', label: 'Satisfaction Rate',  icon: Trophy,     color: '#f59e0b' },
   { end: 10, suffix: '+', label: 'Brands Managed',     icon: BarChart2,  color: '#8b5cf6' },
   { end: 200,suffix: '%', label: 'Avg Follower Growth',icon: TrendingUp, color: '#ec4899' },
@@ -147,8 +126,8 @@ const counters = [
 const socials = [
   { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/prince-ranjan-5ba3a0172/', label: 'LinkedIn',  color: '#0a66c2' },
   { icon: GithubIcon,   href: 'https://github.com/princeranjan279',                   label: 'GitHub',    color: '#a5b4fc' },
-  { icon: InstagramIcon,href: 'https://www.instagram.com/',                            label: 'Instagram', color: '#e1306c' },
-  { icon: FacebookIcon, href: 'https://www.facebook.com/',                             label: 'Facebook',  color: '#1877f2' },
+  { icon: InstagramIcon,href: 'https://www.instagram.com/ranjan4142/',                            label: 'Instagram', color: '#e1306c' },
+  { icon: FacebookIcon, href: 'https://www.facebook.com/prince.ranjan.5437/',                             label: 'Facebook',  color: '#1877f2' },
 ];
 
 /* ── LiveCounter sub-component ──────────────── */
@@ -457,16 +436,31 @@ const Home: React.FC = () => {
             <p className="section-desc">A snapshot of my recent work — websites, campaigns & digital strategies.</p>
           </div>
           <div className="proj-grid">
-            {projects.map(({ title, desc, tags, color, emoji, link }) => (
+            {featuredProjects.map(({ title, desc, tags, color, emoji, live, image }) => (
               <div key={title} className="proj-card" style={{ '--proj-color': color } as React.CSSProperties}>
-                <div className="proj-emoji-wrap" style={{ background: `${color}15` }}>{emoji}</div>
+                <div className="proj-emoji-wrap" style={{ background: `${color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {image ? (
+                    <img 
+                      src={image} 
+                      alt={title} 
+                      style={{ width: '160px', height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.12))' }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                  ) : null}
+                  <span style={{ display: image ? 'none' : 'flex' }}>{emoji}</span>
+                </div>
                 <div className="proj-body">
                   <h3 className="proj-title">{title}</h3>
                   <p className="proj-desc">{desc}</p>
                   <div className="proj-tags">
                     {tags.map(t => <span key={t} className="proj-tag">{t}</span>)}
                   </div>
-                  <a href={link} target={link.startsWith('http') ? '_blank' : undefined}
+                  <a href={live} target={live.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer" className="proj-link">
                     View Project <ExternalLink size={13} />
                   </a>

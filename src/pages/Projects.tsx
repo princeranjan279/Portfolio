@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import { ExternalLink, Globe, FolderOpen, Filter } from "lucide-react";
 import { GithubIcon } from "../components/SocialIcons";
+import { allProjects, projectCategories } from "../data/projects";
 import "./Projects.css";
-
-const projects = [
-  { id: 1, title: "Prishal Technolabs Website", category: "React", tags: ["React", "TypeScript", "Tailwind"], desc: "Complete corporate website and digital presence for Prishal Technolabs. Built with modern React architecture for extreme performance and SEO.", color: "#5e72e4", emoji: "🏢", live: "https://example.com", github: "" },
-  { id: 2, title: "E-Commerce Fashion Store", category: "WordPress", tags: ["WordPress", "WooCommerce", "SEO"], desc: "A full-featured fashion e-commerce store with custom WooCommerce setup, product filters, wishlist, and payment gateway integration.", color: "#11cdef", emoji: "🛍️", live: "https://example.com", github: "" },
-  { id: 3, title: "B2B Marketing Campaigns", category: "Marketing", tags: ["Meta Ads", "Google Ads", "Lead Gen"], desc: "High-ROI digital marketing campaigns resulting in 300% lead increase and lower customer acquisition costs.", color: "#fb6340", emoji: "🚀", live: "https://example.com", github: "" },
-  { id: 4, title: "Real Estate Listing Portal", category: "React", tags: ["React", "Leaflet", "API"], desc: "Property listing app with map integration, advanced search filters, virtual tours, and agent profiles.", color: "#2dce89", emoji: "🏠", live: "https://example.com", github: "https://github.com/princeranjan" },
-  { id: 5, title: "EdTech Course Platform", category: "WordPress", tags: ["WordPress", "LearnDash", "LMS"], desc: "Complete Learning Management System with course builder, quizzes, progress tracking, and certificate generation.", color: "#f7c948", emoji: "📚", live: "https://example.com", github: "" },
-  { id: 6, title: "Social Media Dashboard", category: "React", tags: ["React", "Chart.js", "API"], desc: "Analytics dashboard for social media managers with real-time metrics, post scheduling, and performance reports.", color: "#e1306c", emoji: "📊", live: "https://example.com", github: "https://github.com/princeranjan" },
-  { id: 7, title: "Fitness & Wellness App", category: "React", tags: ["React", "CSS Animations", "Firebase"], desc: "Modern fitness platform with workout plans, nutrition tracker, progress charts, and coach booking.", color: "#5e72e4", emoji: "💪", live: "https://example.com", github: "https://github.com/princeranjan" },
-  { id: 8, title: "Local SEO Dominance", category: "Marketing", tags: ["SEO", "GMB", "Content"], desc: "Comprehensive local SEO strategy that ranked a client #1 for competitive keywords in their region.", color: "#11cdef", emoji: "🔍", live: "https://example.com", github: "" },
-];
-
-const categories = ["All", "React", "WordPress", "Marketing"];
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState("All");
-  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const filtered = filter === "All" ? allProjects : allProjects.filter((p) => p.category === filter);
 
   return (
     <main className="projects-page">
@@ -41,9 +29,9 @@ const Projects: React.FC = () => {
         <div className="container">
           <div className="projects-filter">
             <Filter size={16} style={{ color: "var(--text-muted)" }} />
-            {categories.map((cat) => (
+            {projectCategories.map((cat) => (
               <button key={cat} className={`filter-btn ${filter === cat ? "active" : ""}`} onClick={() => setFilter(cat)}>
-                {cat} ({cat === "All" ? projects.length : projects.filter((p) => p.category === cat).length})
+                {cat} ({cat === "All" ? allProjects.length : allProjects.filter((p) => p.category === cat).length})
               </button>
             ))}
           </div>
@@ -52,16 +40,29 @@ const Projects: React.FC = () => {
             <div className="featured-project">
               <div className="featured-tag"><span>Featured Project</span></div>
               <div className="featured-grid">
-                <div className="featured-emoji" style={{ background: `${projects[0].color}18` }}>
-                  <span style={{ fontSize: "5rem" }}>{projects[0].emoji}</span>
+                <div className="featured-emoji" style={{ background: `${allProjects[0].color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {allProjects[0].image ? (
+                    <img 
+                      src={allProjects[0].image} 
+                      alt={allProjects[0].title} 
+                      style={{ width: '240px', height: '140px', objectFit: 'contain', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.15))' }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                  ) : null}
+                  <span style={{ fontSize: "5rem", display: allProjects[0].image ? 'none' : 'block' }}>{allProjects[0].emoji}</span>
                 </div>
                 <div className="featured-content">
                   <div className="flex gap-8" style={{ flexWrap: "wrap", marginBottom: 12 }}>
-                    {projects[0].tags.map((t) => (<span key={t} className="badge badge-primary">{t}</span>))}
+                    {allProjects[0].tags.map((t) => (<span key={t} className="badge badge-primary">{t}</span>))}
                   </div>
-                  <h2 className="heading-1" style={{ marginBottom: 12 }}>{projects[0].title}</h2>
-                  <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 24 }}>{projects[0].desc}</p>
-                  <a href={projects[0].live} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                  <h2 className="heading-1" style={{ marginBottom: 12 }}>{allProjects[0].title}</h2>
+                  <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 24 }}>{allProjects[0].desc}</p>
+                  <a href={allProjects[0].live} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <Globe size={16} /> Live Preview
                   </a>
                 </div>
@@ -72,8 +73,21 @@ const Projects: React.FC = () => {
           <div className="projects-grid">
             {filtered.filter((_, i) => !(filter === "All" && i === 0)).map((project) => (
               <div key={project.id} className="project-card card">
-                <div className="project-thumbnail" style={{ background: `${project.color}12` }}>
-                  <span className="project-emoji">{project.emoji}</span>
+                <div className="project-thumbnail" style={{ background: `${project.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {project.image ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      style={{ width: '160px', height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.12))', position: 'relative', zIndex: 1 }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                  ) : null}
+                  <span className="project-emoji" style={{ display: project.image ? 'none' : 'flex', position: 'relative', zIndex: 1 }}>{project.emoji}</span>
                   <div className="project-overlay">
                     <div className="flex gap-12">
                       <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">
