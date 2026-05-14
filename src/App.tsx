@@ -13,6 +13,7 @@ const Services = lazy(() => import('./pages/Services'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Contact = lazy(() => import('./pages/Contact'));
+const SkillDetail = lazy(() => import('./pages/SkillDetail'));
 
 const LoadingFallback = () => (
   <div style={{
@@ -48,6 +49,7 @@ const App: React.FC = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/skills/:id" element={<SkillDetail />} />
           <Route path="*" element={
             <div style={{
               height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',

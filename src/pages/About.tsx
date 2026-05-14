@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Download, GraduationCap, Briefcase, Award, Code2,
+  GraduationCap, Briefcase, Award, Code2,
   ArrowRight, CheckCircle2, MapPin, Mail, Star,
   TrendingUp, Users, Globe, Sparkles, Layers,
   Search, Cpu, BarChart2, BookOpen

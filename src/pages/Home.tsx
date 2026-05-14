@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Sparkles, Code2, Globe, Megaphone,
+  ArrowRight, Code2, Globe, Megaphone,
   TrendingUp, GraduationCap, Star, ChevronRight,
-  Search, Cpu, MapPin, Briefcase, Users, BookOpen,
-  MessageSquare, CheckCircle2, ExternalLink, Zap,
+  Search, Cpu, MapPin, Briefcase, Users,
+  MessageSquare, ExternalLink, Zap,
   BarChart2, Clock, Gamepad2, Trophy, Target
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon, InstagramIcon, FacebookIcon } from '../components/SocialIcons';
 import HomeGame from './HomeGame';
+import SkillLightbox from '../components/SkillLightbox';
+import { skillGroups, skillsById, type Skill } from '../data/skills';
 import './Home.css';
 
 /* ── Data ──────────────────────────────────── */
@@ -19,11 +21,14 @@ const stats = [
   { number: '100%', label: 'Satisfaction Rate' },
 ];
 
-const skills = [
-  'React.js', 'TypeScript', 'WordPress', 'HTML5 / CSS3',
-  'JavaScript', 'Meta Ads', 'Google Ads', 'SEO / GEO',
-  'AI SEO Tools', 'Social Media', 'Figma', 'Elementor',
-  'Git / GitHub', 'Career Advisory',
+
+
+
+const flatSkills = skillGroups.flatMap(g => g.skills.map(s => ({ ...s, color: g.color })));
+const marqueeRows = [
+  flatSkills.slice(0, 8),
+  flatSkills.slice(8, 16),
+  [...flatSkills.slice(16, 22), flatSkills[0], flatSkills[1]]
 ];
 
 const services = [
@@ -74,8 +79,8 @@ const services = [
 const highlights = [
   { icon: Briefcase, value: 'Prishal Technolabs Pvt. Ltd.', label: 'Currently at', color: '#6366f1' },
   { icon: MapPin,    value: 'Patna, Bihar, India',          label: 'Based in',     color: '#06b6d4' },
-  { icon: GraduationCap, value: 'Bihar Engineering University', label: 'Studied at', color: '#10b981' },
-  { icon: Globe,     value: 'India · US · UK · UAE',        label: 'Clients from', color: '#f59e0b' },
+  { icon: GraduationCap, value: 'Biju Patnaik University of Technology, Odisha', label: 'Studied at', color: '#10b981' },
+  { icon: Globe,     value: 'India . USA',        label: 'Clients from', color: '#f59e0b' },
 ];
 
 const testimonials = [
@@ -169,6 +174,13 @@ const LiveCounter: React.FC<{ end: number; suffix: string }> = ({ end, suffix })
 /* ── Component ─────────────────────────────── */
 const Home: React.FC = () => {
   const [typed, setTyped] = useState('');
+  const [activeLightbox, setActiveLightbox] = useState<{ skill: Skill; groupColor: string } | null>(null);
+
+  const openLightbox = (skillId: string, groupColor: string) => {
+    const skill = skillsById[skillId];
+    if (skill) setActiveLightbox({ skill, groupColor });
+  };
+  const closeLightbox = () => setActiveLightbox(null);
   // Updated phrases matching LinkedIn/About data
   const phrases = [
     'Software Developer',
@@ -208,6 +220,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
+    <>
     <main className="home-page">
 
       {/* ── Hero ───────────────────────────────── */}
@@ -232,14 +245,14 @@ const Home: React.FC = () => {
             </div>
 
             <h1 className="hero-title display-1">
-              Hi, I'm <span className="text-gradient">Prince Ranjan</span>
+              Hi, I'm <br/><span className="text-gradient">Prince Ranjan</span>
             </h1>
             <div className="hero-typed">
               <span className="typed-text">{typed}</span>
               <span className="typed-cursor">|</span>
             </div>
             <p className="hero-desc">
-              A <strong>Software Developer</strong> & <strong>Digital Marketing SME</strong> based in <strong>Patna, Bihar</strong>.
+              A <strong>Software Developer</strong> & <strong>Digital Marketer</strong> based in <strong>Patna, Bihar</strong>.
               Currently at <strong>Prishal Technolabs Pvt. Ltd.</strong> — building AI-powered websites,
               driving SEO & GEO strategies, running Meta Ads campaigns, and mentoring the next generation of digital professionals.
             </p>
@@ -321,21 +334,43 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Skills ─────────────────────────────── */}
+      {/* ── Skills Marquee ───────────────────────── */}
       <section className="section section-skills">
         <div className="container">
           <div className="section-header">
-            <div className="section-label">Tech Stack</div>
-            <h2 className="heading-1 section-title">Skills & Technologies</h2>
-            <p className="section-desc">A versatile toolkit spanning software development, AI SEO, marketing, and design.</p>
+            <div className="section-label">Toolkit</div>
+            <h2 className="heading-1 section-title">Skills &amp; Expertise</h2>
+            <p className="section-desc">A versatile toolkit spanning software development, digital marketing, Indian market trading, and career consulting.</p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '0.85rem', color: 'var(--color-primary)', fontWeight: 600, background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.2)', padding: '6px 16px', borderRadius: '100px', width: 'fit-content', margin: '16px auto 0' }}>
+              <Zap size={14} /> Click any skill to explore full lessons & tutorials
+            </div>
           </div>
-          <div className="skills-cloud">
-            {skills.map((skill, i) => (
-              <span key={skill} className="skill-tag animate-fadeInUp" style={{ animationDelay: `${i * 0.05}s` }}>
-                {skill}
-              </span>
-            ))}
-          </div>
+        </div>
+
+        <div className="skills-marquee-container">
+          {marqueeRows.map((row, rowIndex) => (
+            <div key={rowIndex} className={`marquee-row ${rowIndex % 2 === 0 ? 'marquee-left' : 'marquee-right'}`}>
+              <div className="marquee-track">
+                {[1, 2, 3, 4].map((dup) => (
+                  <div key={dup} className="marquee-content" aria-hidden={dup > 1 ? "true" : "false"}>
+                    {row.map((skill, i) => (
+                      <button
+                        key={i}
+                        className="marquee-item marquee-item-btn"
+                        style={{ '--item-color': skill.color } as React.CSSProperties}
+                        onClick={() => openLightbox(skill.id, skill.color)}
+                        title={`Learn about ${skill.name}`}
+                        aria-label={`Open ${skill.name} details`}
+                      >
+                        <skill.icon size={18} className="marquee-item-icon" />
+                        <span className="marquee-item-name">{skill.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -515,6 +550,14 @@ const Home: React.FC = () => {
       </section>
 
     </main>
+
+      {/* Skill Lightbox */}
+      <SkillLightbox
+        skill={activeLightbox?.skill ?? null}
+        groupColor={activeLightbox?.groupColor ?? '#6366f1'}
+        onClose={closeLightbox}
+      />
+    </>
   );
 };
 
