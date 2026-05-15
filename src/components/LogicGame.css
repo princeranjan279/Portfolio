@@ -14,6 +14,47 @@
   font-size: 0.9rem;
 }
 
+.lg-level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lg-level-num {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lg-level-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.lg-level-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lg-level-dot.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  transform: scale(1.2);
+}
+
+.lg-level-dot.done {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  opacity: 0.6;
+}
+
 /* Terminal Styling */
 .lg-terminal {
   background: #0f172a;

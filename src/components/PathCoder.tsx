@@ -18,7 +18,7 @@ const LEVELS: Level[] = [
       [0, 1, 1, 3]
     ],
     start: { x: 0, y: 0, dir: 1 },
-    maxCommands: 8
+    maxCommands: 15
   },
   {
     grid: [
@@ -29,7 +29,7 @@ const LEVELS: Level[] = [
       [3, 0, 0, 0, 0]
     ],
     start: { x: 0, y: 0, dir: 2 },
-    maxCommands: 12
+    maxCommands: 30
   },
   {
     grid: [
@@ -41,7 +41,30 @@ const LEVELS: Level[] = [
       [1, 1, 1, 1, 1, 3]
     ],
     start: { x: 0, y: 0, dir: 1 },
-    maxCommands: 15
+    maxCommands: 40
+  },
+  {
+    grid: [
+      [2, 0, 1, 0, 0],
+      [0, 0, 1, 0, 1],
+      [1, 0, 0, 0, 0],
+      [0, 0, 1, 1, 0],
+      [0, 1, 3, 0, 0]
+    ],
+    start: { x: 0, y: 0, dir: 2 },
+    maxCommands: 25
+  },
+  {
+    grid: [
+      [2, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 1, 0],
+      [0, 1, 3, 0, 1, 0],
+      [0, 1, 0, 1, 1, 0],
+      [0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1]
+    ],
+    start: { x: 0, y: 0, dir: 2 },
+    maxCommands: 45
   }
 ];
 
@@ -133,6 +156,16 @@ const PathCoder: React.FC = () => {
     <div className="pc-container">
       <div className="pc-meta">
         <div className="pc-level-info">Level {levelIdx + 1}: Path Planning</div>
+        <div className="pc-level-select">
+          {LEVELS.map((_, i) => (
+            <button 
+              key={i} 
+              className={`pc-level-dot ${levelIdx === i ? 'active' : ''}`}
+              onClick={() => !isRunning && setLevelIdx(i)}
+              title={`Level ${i + 1}`}
+            />
+          ))}
+        </div>
         <div className="pc-cmd-count">Commands: {commands.length}/{level.maxCommands}</div>
       </div>
 

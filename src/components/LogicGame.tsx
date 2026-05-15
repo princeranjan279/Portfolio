@@ -51,6 +51,34 @@ const PROBLEMS: LogicProblem[] = [
     target: true,
     inputs: ["A", "B", "C"],
     validate: (v) => v.A ? v.B : v.C
+  },
+  {
+    id: 7,
+    expression: "(A && B) || (C && !A)",
+    target: true,
+    inputs: ["A", "B", "C"],
+    validate: (v) => (v.A && v.B) || (v.C && !v.A)
+  },
+  {
+    id: 8,
+    expression: "A === B ? C : !C",
+    target: false,
+    inputs: ["A", "B", "C"],
+    validate: (v) => (v.A === v.B) ? v.C : !v.C
+  },
+  {
+    id: 9,
+    expression: "A ^ B ^ C", // XOR simulation
+    target: true,
+    inputs: ["A", "B", "C"],
+    validate: (v) => ((v.A ? 1 : 0) ^ (v.B ? 1 : 0) ^ (v.C ? 1 : 0)) === 1
+  },
+  {
+    id: 10,
+    expression: "(A && B) === (A || B)",
+    target: false,
+    inputs: ["A", "B"],
+    validate: (v) => ((v.A && v.B) === (v.A || v.B))
   }
 ];
 
@@ -58,7 +86,6 @@ const LogicGame: React.FC = () => {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [inputs, setInputs] = useState<Record<string, boolean>>({});
   const [isCorrect, setIsCorrect] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
@@ -72,7 +99,6 @@ const LogicGame: React.FC = () => {
     });
     setInputs(initialInputs);
     setIsCorrect(false);
-    setShowSuccess(false);
   }, [problem]);
 
   useEffect(() => {
@@ -83,7 +109,6 @@ const LogicGame: React.FC = () => {
     const nextInputs = { ...inputs, [key]: !inputs[key] };
     setInputs(nextInputs);
     
-    // Check if valid
     if (problem.validate(nextInputs) === problem.target) {
       setIsCorrect(true);
     } else {
@@ -116,7 +141,18 @@ const LogicGame: React.FC = () => {
   return (
     <div className="lg-container">
       <div className="lg-header">
-        <div className="lg-level">Level {currentLevel + 1} / {PROBLEMS.length}</div>
+        <div className="lg-level-info">
+          <div className="lg-level-num">Level {currentLevel + 1} / {PROBLEMS.length}</div>
+          <div className="lg-level-dots">
+            {PROBLEMS.map((_, i) => (
+              <div 
+                key={i} 
+                className={`lg-level-dot ${currentLevel === i ? 'active' : ''} ${currentLevel > i ? 'done' : ''}`}
+                onClick={() => setCurrentLevel(i)}
+              />
+            ))}
+          </div>
+        </div>
         <div className="lg-score">Score: {score}</div>
       </div>
 

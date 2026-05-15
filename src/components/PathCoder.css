@@ -8,10 +8,37 @@
 .pc-meta {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--text-secondary);
   font-size: 0.85rem;
+}
+
+.pc-level-select {
+  display: flex;
+  gap: 8px;
+}
+
+.pc-level-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.pc-level-dot:hover {
+  border-color: var(--color-primary-light);
+}
+
+.pc-level-dot.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
 }
 
 .pc-layout {

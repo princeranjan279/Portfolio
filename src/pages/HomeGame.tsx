@@ -20,7 +20,14 @@ function shuffle(arr: Card[]) {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+const MEMORY_LEVELS = [
+  { id: 1, pairs: 2, cols: 2 },
+  { id: 2, pairs: 8, cols: 4 },
+  { id: 3, pairs: 10, cols: 5 },
+];
+
 const MemoryMatch: React.FC<{ onWin: (moves: number) => void, bestScore: number | null }> = ({ onWin, bestScore }) => {
+  const [levelIdx, setLevelIdx]   = useState(1); // Default to middle level
   const [cards, setCards]         = useState<Card[]>([]);
   const [flipped, setFlipped]     = useState<number[]>([]);
   const [matched, setMatched]     = useState<number[]>([]);
@@ -28,24 +35,28 @@ const MemoryMatch: React.FC<{ onWin: (moves: number) => void, bestScore: number 
   const [won, setWon]             = useState(false);
   const [locked, setLocked]       = useState(false);
 
+  const level = MEMORY_LEVELS[levelIdx];
+
   const init = useCallback(() => {
-    const deck = shuffle([...CARDS, ...CARDS].map((c, i) => ({ ...c, uid: i })));
+    const selectedLevel = MEMORY_LEVELS[levelIdx];
+    const subset = CARDS.slice(0, selectedLevel.pairs);
+    const deck = shuffle([...subset, ...subset].map((c, i) => ({ ...c, uid: i })));
     setCards(deck);
     setFlipped([]);
     setMatched([]);
     setMoves(0);
     setWon(false);
     setLocked(false);
-  }, []);
+  }, [levelIdx]);
 
   useEffect(() => { init(); }, [init]);
 
   useEffect(() => {
-    if (matched.length === CARDS.length * 2) {
+    if (matched.length > 0 && matched.length === MEMORY_LEVELS[levelIdx].pairs * 2) {
       setWon(true);
       onWin(moves);
     }
-  }, [matched, moves, onWin]);
+  }, [matched, moves, onWin, levelIdx]);
 
   const flip = (uid: number) => {
     if (locked || flipped.includes(uid) || matched.includes(uid)) return;
@@ -69,9 +80,14 @@ const MemoryMatch: React.FC<{ onWin: (moves: number) => void, bestScore: number 
     return (
       <div className="hg-win">
         <div className="hg-win-emoji">🎉</div>
-        <h3 className="hg-win-title">You Won!</h3>
+        <h3 className="hg-win-title">Level {level.id} Clear!</h3>
         <p className="hg-win-sub">Completed in <strong>{moves}</strong> moves!</p>
-        <button className="hg-reset-btn hg-play-again" onClick={init}>Play Again</button>
+        <div className="flex gap-12" style={{ marginTop: 16 }}>
+          <button className="hg-reset-btn" onClick={init}>Retry</button>
+          {levelIdx < MEMORY_LEVELS.length - 1 && (
+            <button className="hg-reset-btn btn-primary" onClick={() => setLevelIdx(l => l + 1)}>Next Level →</button>
+          )}
+        </div>
       </div>
     );
   }
@@ -79,12 +95,23 @@ const MemoryMatch: React.FC<{ onWin: (moves: number) => void, bestScore: number 
   return (
     <>
       <div className="hg-header">
+        <div className="lg-level-info" style={{ marginRight: 'auto' }}>
+          <div className="lg-level-num">Difficulty</div>
+          <div className="lg-level-dots">
+            {MEMORY_LEVELS.map((_, i) => (
+              <div 
+                key={i} 
+                className={`lg-level-dot ${levelIdx === i ? 'active' : ''}`}
+                onClick={() => setLevelIdx(i)}
+              />
+            ))}
+          </div>
+        </div>
         <div className="hg-stat"><span className="hg-stat-val">{moves}</span><span className="hg-stat-lbl">Moves</span></div>
-        <div className="hg-stat"><span className="hg-stat-val">{matched.length / 2}/{CARDS.length}</span><span className="hg-stat-lbl">Matched</span></div>
-        <div className="hg-stat"><span className="hg-stat-val">{bestScore ?? '—'}</span><span className="hg-stat-lbl">Best</span></div>
+        <div className="hg-stat"><span className="hg-stat-val">{matched.length / 2}/{level.pairs}</span><span className="hg-stat-lbl">Matched</span></div>
         <button className="hg-reset-btn" onClick={init}>↺ Reset</button>
       </div>
-      <div className="hg-grid">
+      <div className="hg-grid" style={{ gridTemplateColumns: `repeat(${level.cols}, 1fr)` }}>
         {cards.map(card => {
           const isFlipped  = flipped.includes(card.uid);
           const isMatched  = matched.includes(card.uid);
