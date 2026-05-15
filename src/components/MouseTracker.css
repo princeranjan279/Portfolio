@@ -1,0 +1,58 @@
+.mouse-tracker-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.mouse-follower {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  z-index: 9999;
+  transition: width 0.3s cubic-bezier(0.2, 0, 0.2, 1), 
+              height 0.3s cubic-bezier(0.2, 0, 0.2, 1),
+              opacity 0.3s ease,
+              background-color 0.3s ease,
+              border-color 0.3s ease;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+}
+
+.mouse-follower.active {
+  width: 48px;
+  height: 48px;
+  opacity: 0.6;
+  background-color: rgba(99, 102, 241, 0.05);
+  border-color: var(--color-primary);
+  border-width: 1px;
+}
+
+/* Very subtle center glow instead of a hard dot */
+.mouse-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  z-index: 10000;
+  filter: blur(1px);
+}
+
+.mouse-dot.active {
+  opacity: 0; /* Hide dot on hover to let the follower be the focus */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .mouse-tracker-container {
+    display: none;
+  }
+}

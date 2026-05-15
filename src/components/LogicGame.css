@@ -1,0 +1,196 @@
+.lg-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Terminal Styling */
+.lg-terminal {
+  background: #0f172a;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.lg-terminal-header {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.lg-dot.red { background: #ff5f56; }
+.lg-dot.yellow { background: #ffbd2e; }
+.lg-dot.green { background: #27c93f; }
+
+.lg-terminal-title {
+  margin-left: 8px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.lg-terminal-body {
+  padding: 24px;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.lg-code-line {
+  margin-bottom: 8px;
+}
+
+.lg-keyword { color: #c678dd; }
+.lg-var { color: #e06c75; }
+.lg-expression { color: #61afef; font-weight: 600; }
+.lg-func { color: #61afef; }
+.lg-bool { color: #d19a66; }
+
+/* Controls */
+.lg-controls {
+  text-align: center;
+}
+
+.lg-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.lg-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.lg-input-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  padding: 12px;
+  background: var(--bg-card-2);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lg-input-btn.active {
+  border-color: var(--color-primary);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+}
+
+.lg-input-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.lg-input-btn.active .lg-input-label {
+  color: var(--color-primary);
+}
+
+.lg-input-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.lg-footer {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lg-success-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: lg-slide-up 0.3s ease;
+}
+
+.lg-success-msg {
+  color: var(--color-success);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.lg-next-btn {
+  padding: 10px 24px;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: 99px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-primary);
+  transition: transform 0.2s;
+}
+
+.lg-next-btn:hover {
+  transform: scale(1.05);
+}
+
+.lg-error-msg {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Win Screen */
+.lg-win {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.lg-win-emoji { font-size: 4rem; margin-bottom: 16px; }
+.lg-win-title { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+.lg-win-sub { color: var(--text-secondary); margin-bottom: 24px; }
+.lg-score-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 99px;
+  font-weight: 800;
+  margin-bottom: 32px;
+}
+
+@keyframes lg-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .lg-terminal-body { font-size: 0.9rem; padding: 16px; }
+  .lg-inputs { gap: 10px; }
+  .lg-input-btn { width: 60px; padding: 8px; }
+}

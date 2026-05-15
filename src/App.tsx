@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import AIAgentWidget from './components/AIAgentWidget';
+import MouseTracker from './components/MouseTracker';
 import './index.css';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -39,6 +40,7 @@ const ScrollToTop = () => {
 const App: React.FC = () => (
   <ThemeProvider>
     <BrowserRouter>
+      <MouseTracker />
       <ScrollToTop />
       <Navbar />
       <Suspense fallback={<LoadingFallback />}>
