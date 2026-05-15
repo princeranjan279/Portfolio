@@ -169,6 +169,12 @@ const HomeGame: React.FC = () => {
         </button>
       </div>
 
+      <div className="hg-game-intro">
+        {activeGame === 'memory' && <p>Test your focus by matching pairs of technical skill icons in the fewest moves possible.</p>}
+        {activeGame === 'logic' && <p>Solve complex boolean challenges by toggling inputs to make the system logic evaluate to the target state.</p>}
+        {activeGame === 'path' && <p>Program a sequence of navigation commands to guide the rocket through deep space to the target station.</p>}
+      </div>
+
       <div className="hg-game-content">
         {activeGame === 'memory' ? (
           <MemoryMatch onWin={handleMemoryWin} bestScore={bestMemory} />
