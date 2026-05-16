@@ -12,6 +12,7 @@ import HomeGame from './HomeGame';
 import SkillLightbox from '../components/SkillLightbox';
 import { skillGroups, skillsById, type Skill } from '../data/skills';
 import { allProjects } from '../data/projects';
+import { initialTestimonials } from '../data/testimonials';
 import './Home.css';
 
 /* ── Data ──────────────────────────────────── */
@@ -84,32 +85,7 @@ const highlights = [
   { icon: Globe,     value: 'India . USA',        label: 'Clients from', color: '#f59e0b' },
 ];
 
-const initialTestimonials = [
-  {
-    name: 'Rahul Sharma',
-    role: 'Startup Founder',
-    text: 'Prince transformed our online presence completely. The website he built and the SEO strategy he executed exceeded all expectations! The attention to detail and modern design truly set him apart.',
-    rating: 5,
-    date: '2 months ago',
-    image: '/professional_man_avatar.png'
-  },
-  {
-    name: 'Priya Singh',
-    role: 'Business Owner',
-    text: "His Meta Ads expertise doubled our leads in just 2 months. Truly exceptional work — he really understands digital marketing and how to drive ROAS. A reliable partner for any growing business.",
-    rating: 5,
-    date: '1 month ago',
-    image: '/business_woman_avatar.png'
-  },
-  {
-    name: 'Amit Kumar',
-    role: 'Fresh Graduate',
-    text: 'The career advisory session with Prince gave me a clear roadmap into tech. I landed my first job within 3 months of following his plan! His guidance is practical, honest, and extremely effective.',
-    rating: 5,
-    date: '3 weeks ago',
-    image: '/young_graduate_avatar.png'
-  },
-];
+
 
 const process = [
   { step: '01', icon: MessageSquare, title: 'Discovery Call',      desc: 'We discuss your goals, requirements, timeline, and budget in a free 30-min call.',     color: '#6366f1' },
@@ -547,8 +523,8 @@ const Home: React.FC = () => {
 
 
 
-          <div className="testimonials-masonry">
-            {testimonials.map(({ name, role, text, rating, image, date }, idx) => (
+          <div className="testimonials-grid">
+            {testimonials.slice(0, 3).map(({ name, role, text, rating, image, date }, idx) => (
               <div key={`${name}-${idx}`} className="testi-card-premium">
                 <div className="testi-quote-icon">
                   <Quote size={24} />
@@ -585,9 +561,9 @@ const Home: React.FC = () => {
 
           {/* Testimonial Actions */}
           <div className="testi-actions">
-            <a href="https://www.google.com/search?q=Prince+Ranjan+Patna+Reviews" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-              View All Google Reviews <ExternalLink size={16} />
-            </a>
+            <Link to="/testimonials" className="btn btn-outline">
+              View All Review <ArrowRight size={16} />
+            </Link>
             <button 
               onClick={() => setIsReviewModalOpen(true)}
               className="btn btn-primary"

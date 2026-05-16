@@ -67,11 +67,11 @@ const journey = [
   {
     year: '2019 – 2022',
     role: 'Engineering / Technology Degree',
-    org: 'Bihar Engineering University',
+    org: 'Biju Patnaik University of Technology',
     location: 'Patna, Bihar, India',
-    desc: 'Graduated from Bihar Engineering University, Patna — building a strong technical foundation in computer science, software engineering, web technologies, and database management. Began freelancing and building real-world web projects during the final year, bridging academics with industry.',
+    desc: 'Graduated from Biju Patnaik University of Technology — building a strong technical foundation in computer science, software engineering, web technologies, and database management. Began freelancing and building real-world web projects during the final year, bridging academics with industry.',
     type: 'education',
-    highlights: ['Bihar Engineering University', 'Computer Science', 'Web Technologies', 'Freelancing Started']
+    highlights: ['Biju Patnaik University of Technology', 'Computer Science', 'Web Technologies', 'Freelancing Started']
   },
 ];
 
@@ -183,7 +183,7 @@ const About: React.FC = () => (
           The Story Behind <span className="text-gradient">the Code</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: 620 }}>
-          From Bihar Engineering University to building AI-driven websites & SEO strategies — a developer, marketer, and mentor on a mission to create digital impact.
+          From Biju Patnaik University of Technology to building AI-driven websites & SEO strategies — a developer, marketer, and mentor on a mission to create digital impact.
         </p>
       </div>
     </div>
@@ -255,7 +255,7 @@ const About: React.FC = () => (
           </p>
 
           <p style={{ color: 'var(--text-secondary)', marginBottom: 16, lineHeight: 1.85 }}>
-            I graduated from <strong style={{ color: 'var(--text-primary)' }}>Bihar Engineering University, Patna</strong> and have since built a career spanning
+            I graduated from <strong style={{ color: 'var(--text-primary)' }}>Biju Patnaik University of Technology</strong> and have since built a career spanning
             <strong style={{ color: 'var(--color-primary)' }}> React.js & WordPress development</strong>,
             <strong style={{ color: 'var(--color-info)' }}> AI-driven SEO & GEO optimization</strong>,
             <strong style={{ color: 'var(--color-success)' }}> Meta Ads campaigns</strong>, and

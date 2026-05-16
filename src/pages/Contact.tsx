@@ -167,18 +167,12 @@ const Contact: React.FC = () => {
 
     setStatus('sending');
     try {
-      await emailjs.send(
+      if (!formRef.current) throw new Error('Form reference not found');
+
+      await emailjs.sendForm(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
-        {
-          from_name:  form.name.trim(),
-          from_email: form.email.trim(),
-          phone:      form.phone.trim() || 'Not provided',
-          service:    form.service || 'Not specified',
-          message:    form.message.trim(),
-          to_email:   EMAILJS_CONFIG.TO_EMAIL,
-          reply_to:   form.email.trim(),
-        },
+        formRef.current,
         EMAILJS_CONFIG.PUBLIC_KEY
       );
       setStatus('sent');

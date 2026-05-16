@@ -11,9 +11,9 @@
 // ─────────────────────────────────────────────────────────────────
 
 export const EMAILJS_CONFIG = {
-  SERVICE_ID:  'service_prince',      // Replace with your EmailJS Service ID
-  TEMPLATE_ID: 'template_contact',   // Replace with your EmailJS Template ID
-  PUBLIC_KEY:  'YOUR_PUBLIC_KEY',    // Replace with your EmailJS Public Key
+  SERVICE_ID:  'service_h010deb',
+  TEMPLATE_ID: 'template_zl568cz',
+  PUBLIC_KEY:  'Uec9wvhT9q0XgmK1T',
   TO_EMAIL:    'princeranjan270@gmail.com',
 };
 
