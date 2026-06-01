@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2, Sun, Moon, ChevronRight, Home, User, Briefcase, FolderOpen, Camera, Mail } from 'lucide-react';
+import { Menu, X, Code2, Sun, Moon, ChevronRight, Home, User, Briefcase, FolderOpen, Camera, Mail, Terminal } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 
@@ -11,6 +11,7 @@ const navLinks = [
   { path: '/projects', label: 'Projects', icon: FolderOpen },
   { path: '/gallery',  label: 'Gallery',  icon: Camera },
   { path: '/contact',  label: 'Contact',  icon: Mail },
+  { path: '/compiler', label: 'Compiler', icon: Terminal },
 ];
 
 const Navbar: React.FC = () => {
