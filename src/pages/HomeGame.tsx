@@ -108,6 +108,9 @@ const MemoryMatch: React.FC<{ onWin: (moves: number) => void, bestScore: number 
           </div>
         </div>
         <div className="hg-stat"><span className="hg-stat-val">{moves}</span><span className="hg-stat-lbl">Moves</span></div>
+        {bestScore !== null && (
+          <div className="hg-stat"><span className="hg-stat-val">{bestScore}</span><span className="hg-stat-lbl">Best</span></div>
+        )}
         <div className="hg-stat"><span className="hg-stat-val">{matched.length / 2}/{level.pairs}</span><span className="hg-stat-lbl">Matched</span></div>
         <button className="hg-reset-btn" onClick={init}>↺ Reset</button>
       </div>

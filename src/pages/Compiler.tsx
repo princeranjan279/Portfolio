@@ -25,7 +25,7 @@ const LANGUAGES: LangConfig[] = [
   {
     id: 'python',
     label: 'Python',
-    compiler: 'cpython-head',
+    compiler: 'cpython-3.12.7',
     extension: 'py',
     color: '#3b82f6',
     icon: '🐍',
@@ -382,7 +382,7 @@ const LANGUAGES: LangConfig[] = [
   {
     id: 'csharp',
     label: 'C#',
-    compiler: 'dotnetcore-8.0.402',
+    compiler: 'dotnetcore-6.0.425',
     extension: 'cs',
     color: '#818cf8',
     icon: '🔵',
@@ -496,6 +496,9 @@ const OCI_PATTERNS = [
   'Resource temporarily unavailable',
   'container',
   'sandbox',
+  'failed to exec pid1',
+  'catatonit',
+  'failed to exec',
 ];
 
 const isTransientError = (msg: string) =>
@@ -554,6 +557,7 @@ const CODEX_LANG: Record<string, string> = {
   python: 'py', javascript: 'js', java: 'java',
   cpp: 'cpp', c: 'c', go: 'go',
   php: 'php', ruby: 'rb', bash: 'sh',
+  csharp: 'cs',
 };
 
 async function runCodex(lang: LangConfig, code: string, stdin: string): Promise<RunResult> {
@@ -632,6 +636,16 @@ async function runCode(
       }
 
       // Nothing worked
+      if (msg.includes('Unknown compiler')) {
+        throw new Error(
+          `⚠️ The compiler '${lang.compiler}' is currently not supported by the execution engine.`
+        );
+      }
+      if (msg.includes('failed to exec pid1') || msg.includes('catatonit')) {
+        throw new Error(
+          `⚠️ The container sandbox for ${lang.label} is currently experiencing configuration issues on Wandbox.`
+        );
+      }
       if (isTransientError(msg) || msg.startsWith('OCI_TRANSIENT')) {
         throw new Error(
           '⚠️ Compiler servers are temporarily overloaded.\n' +
@@ -687,6 +701,18 @@ const Compiler: React.FC = () => {
   useEffect(() => {
     setLineCount(code.split('\n').length);
   }, [code]);
+
+  /* sync selectedLang with LANGUAGES config updates (useful for hot-reloading/state preservation) */
+  useEffect(() => {
+    const currentConfig = LANGUAGES.find(l => l.id === selectedLang.id);
+    if (currentConfig && currentConfig.compiler !== selectedLang.compiler) {
+      setSelectedLang(currentConfig);
+      const oldConfig = LANGUAGES.find(l => l.compiler === selectedLang.compiler);
+      if (!oldConfig || code === oldConfig.defaultCode) {
+        setCode(currentConfig.defaultCode);
+      }
+    }
+  }, [selectedLang, code]);
 
   /* sync line-number scroll with editor scroll */
   const syncScroll = useCallback(() => {

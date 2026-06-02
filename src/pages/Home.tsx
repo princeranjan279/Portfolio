@@ -149,7 +149,6 @@ const Home: React.FC = () => {
   const [activeLightbox, setActiveLightbox] = useState<{ skill: Skill; groupColor: string } | null>(null);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [testimonials, setTestimonials] = useState(initialTestimonials);
-  const reviewRef = useRef<HTMLDivElement>(null);
 
   const handleReviewSubmit = (review: any) => {
     setTestimonials([review, ...testimonials]);
