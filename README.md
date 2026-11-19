@@ -8,7 +8,7 @@ A premium, fully responsive personal portfolio website built with **React + Type
 ## 👤 About
 **Prince Ranjan** — Frontend Developer, WordPress Expert, Social Media Manager & Digital Marketing Adviser from India.
 
-- 📧 Email: [princeranjan270@gmail.com](mailto:princeranjan270@gmail.com)
+- 📧 Email: [princeranjan279@gmail.com](mailto:princeranjan279@gmail.com)
 - 📞 Phone: +91 7004136051
 - 💼 LinkedIn: [prince-ranjan-5ba3a0172](https://www.linkedin.com/in/prince-ranjan-5ba3a0172/)
 - 🐙 GitHub: [princeranjan279](https://github.com/princeranjan279)

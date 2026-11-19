@@ -11,21 +11,21 @@ import './About.css';
 
 /* ── Static Data ────────────────────────────── */
 const stats = [
-  { value: '3+',   label: 'Years Experience', icon: Star },
-  { value: '50+',  label: 'Projects Delivered', icon: Briefcase },
-  { value: '30+',  label: 'Happy Clients', icon: Users },
+  { value: '3+', label: 'Years Experience', icon: Star },
+  { value: '50+', label: 'Projects Delivered', icon: Briefcase },
+  { value: '30+', label: 'Happy Clients', icon: Users },
   { value: '100%', label: 'Satisfaction Rate', icon: Award },
 ];
 
 const skills = [
-  { name: 'React.js / Frontend Development',   pct: 90, color: '#6366f1' },
-  { name: 'WordPress & CMS Development',        pct: 88, color: '#06b6d4' },
-  { name: 'HTML5 / CSS3 / JavaScript',          pct: 95, color: '#6366f1' },
-  { name: 'SEO & AI-Driven GEO Optimization',   pct: 85, color: '#06b6d4' },
-  { name: 'Meta Ads & Paid Campaigns',          pct: 82, color: '#6366f1' },
-  { name: 'Social Media Management',            pct: 87, color: '#06b6d4' },
-  { name: 'Website Management & Optimization',  pct: 88, color: '#6366f1' },
-  { name: 'UI/UX Design & Figma',               pct: 76, color: '#06b6d4' },
+  { name: 'React.js / Frontend Development', pct: 90, color: '#6366f1' },
+  { name: 'WordPress & CMS Development', pct: 88, color: '#06b6d4' },
+  { name: 'HTML5 / CSS3 / JavaScript', pct: 95, color: '#6366f1' },
+  { name: 'SEO & AI-Driven GEO Optimization', pct: 85, color: '#06b6d4' },
+  { name: 'Meta Ads & Paid Campaigns', pct: 82, color: '#6366f1' },
+  { name: 'Social Media Management', pct: 87, color: '#06b6d4' },
+  { name: 'Website Management & Optimization', pct: 88, color: '#6366f1' },
+  { name: 'UI/UX Design & Figma', pct: 76, color: '#06b6d4' },
 ];
 
 const techStack = [
@@ -115,21 +115,21 @@ const expertise = [
 ];
 
 const values = [
-  { text: 'Clean, maintainable code',   icon: Code2 },
-  { text: 'On-time delivery always',    icon: CheckCircle2 },
-  { text: 'Pixel-perfect design',       icon: Layers },
-  { text: 'Data-driven decisions',      icon: TrendingUp },
-  { text: 'Client-first approach',      icon: Users },
-  { text: 'AI & continuous learning',   icon: Sparkles },
-  { text: 'Remote-first, global work',  icon: Globe },
-  { text: 'Transparent communication',  icon: Mail },
+  { text: 'Clean, maintainable code', icon: Code2 },
+  { text: 'On-time delivery always', icon: CheckCircle2 },
+  { text: 'Pixel-perfect design', icon: Layers },
+  { text: 'Data-driven decisions', icon: TrendingUp },
+  { text: 'Client-first approach', icon: Users },
+  { text: 'AI & continuous learning', icon: Sparkles },
+  { text: 'Remote-first, global work', icon: Globe },
+  { text: 'Transparent communication', icon: Mail },
 ];
 
 const socials = [
-  { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/prince-ranjan-5ba3a0172/', label: 'LinkedIn',  color: '#0a66c2' },
-  { icon: GithubIcon,   href: 'https://github.com/princeranjan279',                   label: 'GitHub',    color: '#a5b4fc' },
-  { icon: InstagramIcon,href: 'https://www.instagram.com/',                            label: 'Instagram', color: '#e1306c' },
-  { icon: FacebookIcon, href: 'https://www.facebook.com/',                             label: 'Facebook',  color: '#1877f2' },
+  { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/prince-ranjan-5ba3a0172/', label: 'LinkedIn', color: '#0a66c2' },
+  { icon: GithubIcon, href: 'https://github.com/princeranjan279', label: 'GitHub', color: '#a5b4fc' },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/', label: 'Instagram', color: '#e1306c' },
+  { icon: FacebookIcon, href: 'https://www.facebook.com/', label: 'Facebook', color: '#1877f2' },
 ];
 
 /* ── Animated Skill Bar ─────────────────────── */
@@ -234,8 +234,8 @@ const About: React.FC = () => (
               ))}
             </div>
 
-            <a href="mailto:princeranjan270@gmail.com" className="about-email-chip">
-              <Mail size={13} /> princeranjan270@gmail.com
+            <a href="mailto:princeranjan279@gmail.com" className="about-email-chip">
+              <Mail size={13} /> princeranjan279@gmail.com
             </a>
           </div>
         </div>

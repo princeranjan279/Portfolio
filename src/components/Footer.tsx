@@ -13,7 +13,7 @@ import './Footer.css';
 
 const socials = [
   { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/prince-ranjan-5ba3a0172/', label: 'LinkedIn', color: '#0a66c2' },
-  { icon: GithubIcon,   href: 'https://github.com/princeranjan',                        label: 'GitHub',   color: '#a5b4fc' },
+  { icon: GithubIcon,   href: 'https://github.com/princeranjan279',                     label: 'GitHub',   color: '#a5b4fc' },
   { icon: InstagramIcon,href: 'https://www.instagram.com/',                             label: 'Instagram',color: '#e1306c' },
   { icon: FacebookIcon, href: 'https://www.facebook.com/',                              label: 'Facebook', color: '#1877f2' },
 ];
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
               <p className="footer-cta-sub">Let's build something extraordinary together.</p>
             </div>
           </div>
-          <a href="mailto:princeranjan270@gmail.com" className="btn btn-primary footer-cta-btn">
+          <a href="mailto:princeranjan279@gmail.com" className="btn btn-primary footer-cta-btn">
             Get In Touch <ArrowRight size={16} />
           </a>
         </div>
@@ -111,8 +111,8 @@ const Footer: React.FC = () => {
               ))}
             </div>
             <div className="footer-contact-mini">
-              <a href="mailto:princeranjan270@gmail.com" className="footer-contact-mini-item">
-                <Mail size={14} /> princeranjan270@gmail.com
+              <a href="mailto:princeranjan279@gmail.com" className="footer-contact-mini-item">
+                <Mail size={14} /> princeranjan279@gmail.com
               </a>
               <a href="tel:+917004136051" className="footer-contact-mini-item">
                 <Phone size={14} /> +91 7004136051
@@ -195,7 +195,7 @@ const Footer: React.FC = () => {
             © {year} <strong>Prince Ranjan</strong>. Crafted with <Heart size={13} className="footer-heart" /> All rights reserved.
           </p>
           <div className="footer-bottom-links">
-            <a href="mailto:princeranjan270@gmail.com" className="footer-bottom-link">
+            <a href="mailto:princeranjan279@gmail.com" className="footer-bottom-link">
               <ExternalLink size={12} /> Hire Me
             </a>
             <span className="footer-bottom-sep">·</span>

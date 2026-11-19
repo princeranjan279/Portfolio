@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <a href="mailto:princeranjan270@gmail.com" className="btn btn-primary btn-sm">
+            <a href="mailto:princeranjan279@gmail.com" className="btn btn-primary btn-sm">
               Hire Me <ChevronRight size={14} />
             </a>
           </div>
@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
         </nav>
         <div className="drawer-footer">
           <a
-            href="mailto:princeranjan270@gmail.com"
+            href="mailto:princeranjan279@gmail.com"
             className="btn btn-primary"
             style={{ width: '100%', justifyContent: 'center' }}
           >

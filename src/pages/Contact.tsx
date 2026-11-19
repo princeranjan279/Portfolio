@@ -56,7 +56,7 @@ const faqs = [
   },
   {
     q: 'How do I get started with you?',
-    a: "Simply fill the contact form on this page or email me at princeranjan270@gmail.com. I'll get back within 24 hours to schedule a free 30-minute discovery call where we discuss your goals, requirements, and budget — no strings attached.",
+    a: "Simply fill the contact form on this page or email me at princeranjan279@gmail.com. I'll get back within 24 hours to schedule a free 30-minute discovery call where we discuss your goals, requirements, and budget — no strings attached.",
     tag: 'Process'
   },
   {
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
-      setErrorMsg('Failed to send message. Please email me directly at princeranjan270@gmail.com');
+      setErrorMsg('Failed to send message. Please email me directly at princeranjan279@gmail.com');
     }
   };
 
@@ -214,11 +214,11 @@ const Contact: React.FC = () => {
           {/* Left: Info */}
           <div className="contact-info animate-fadeInUp">
             <div className="contact-cards">
-              <a href="mailto:princeranjan270@gmail.com" className="contact-info-card">
+              <a href="mailto:princeranjan279@gmail.com" className="contact-info-card">
                 <div className="icon-box icon-box-lg"><Mail size={22} /></div>
                 <div>
                   <p className="contact-card-label">Email</p>
-                  <p className="contact-card-value">princeranjan270@gmail.com</p>
+                  <p className="contact-card-value">princeranjan279@gmail.com</p>
                   <p className="contact-card-note">Response within 24 hours</p>
                 </div>
               </a>
@@ -420,7 +420,7 @@ const Contact: React.FC = () => {
                       </button>
 
                       <p className="form-note">
-                        Your message will be sent directly to <strong>princeranjan270@gmail.com</strong>
+                        Your message will be sent directly to <strong>princeranjan279@gmail.com</strong>
                       </p>
                     </form>
                   </>
@@ -442,7 +442,7 @@ const Contact: React.FC = () => {
             </h2>
             <p className="section-desc">
               Everything you need to know before we work together. Can't find your answer?
-              {' '}<a href="mailto:princeranjan270@gmail.com" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Drop me an email</a>.
+              {' '}<a href="mailto:princeranjan279@gmail.com" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Drop me an email</a>.
             </p>
           </div>
 
@@ -480,7 +480,7 @@ const Contact: React.FC = () => {
           {/* Bottom CTA */}
           <div className="faq-cta">
             <p className="faq-cta-text">Still have questions?</p>
-            <a href="mailto:princeranjan270@gmail.com" className="btn btn-primary">
+            <a href="mailto:princeranjan279@gmail.com" className="btn btn-primary">
               <Mail size={16} /> Email Me Directly
             </a>
           </div>

@@ -274,3 +274,17 @@
   .timeline-header { flex-direction: column-reverse; align-items: flex-start; }
   .about-cta-section { padding: 60px 0; }
 }
+
+.timeline-growth-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.22);
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}

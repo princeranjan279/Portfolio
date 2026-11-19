@@ -13,20 +13,20 @@ const services = [
     color: 'var(--color-primary)',
     bg: 'rgba(99,102,241,0.1)',
     title: 'Software Development',
-    subtitle: 'React.js & WordPress Solutions',
-    desc: "From elegant landing pages to feature-rich business websites, I build digital experiences that look stunning and perform brilliantly. Specializing in high-performance React.js and customizable WordPress platforms.",
+    subtitle: 'Custom CRM & Full-Stack Web Solutions',
+    desc: "Custom CRM products for SME, multi-platform integrations, and high-performance custom websites built with React, PHP, HTML, CSS, and JavaScript. Engineered with an AI-driven touch and enhanced modern technologies.",
     features: [
-      'Custom React.js / Next.js Web Apps',
-      'WordPress Theme Development',
+      'Custom CRM Products for SMEs',
+      'Multi-Platform & API Integrations',
+      'Custom React.js & PHP Applications',
+      'AI-Driven Features & Automations',
+      'WordPress & Custom CMS Solutions',
       'Responsive & Mobile-First Design',
-      'E-Commerce (WooCommerce)',
-      'Landing Page Design',
-      'UI/UX Wireframing & Prototyping',
     ],
     packages: [
       { name: 'Starter', price: '₹8,000', desc: 'Landing page or basic WordPress site' },
       { name: 'Business', price: '₹20,000', desc: 'Full website with CMS & integrations' },
-      { name: 'Enterprise', price: 'Custom', desc: 'React app or large-scale platform' },
+      { name: 'Enterprise', price: 'Custom', desc: 'Custom CRM, React app or large-scale platform' },
     ]
   },
   {
@@ -242,7 +242,7 @@ const Services: React.FC = () => {
                       </div>
                     </div>
                   ))}
-                  <a href="mailto:princeranjan270@gmail.com" className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}>
+                  <a href="mailto:princeranjan279@gmail.com" className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}>
                     Discuss Custom Requirements
                   </a>
                 </div>
